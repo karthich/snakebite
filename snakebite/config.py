@@ -58,6 +58,13 @@ class HDFSConfig(object):
                                "port": parse_result.port if parse_result.port
                                                          else Namenode.DEFAULT_PORT})
 
+            elif property.findall('name')[0].text == 'fs.default.name':
+                parse_result = urlparse(property.findall('value')[0].text)
+                log.debug("Got namenode '%s' from %s" % (parse_result.geturl(), core_site_path))
+
+                config.append({"namenode": parse_result.hostname,
+                               "port": parse_result.port if parse_result.port
+                                                         else Namenode.DEFAULT_PORT})
 
             if property.findall('name')[0].text == 'fs.trash.interval':
                 cls.use_trash = True
