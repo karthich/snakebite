@@ -58,6 +58,7 @@ class HDFSConfig(object):
                                "port": parse_result.port if parse_result.port
                                                          else Namenode.DEFAULT_PORT})
 
+
             if property.findall('name')[0].text == 'fs.trash.interval':
                 cls.use_trash = True
 
